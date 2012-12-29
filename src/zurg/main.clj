@@ -6,10 +6,12 @@
 (def rex 20)
 (def hamm 25)
 
-(def bound 60)
+(def boundary 60)
 
 (defn do-solve []
-  (run* [q]))
+  (run* [q]
+    (project [q]
+      (== true (< q boundary)))))
 
 (defn -main [& args]
   (println (do-solve)))
