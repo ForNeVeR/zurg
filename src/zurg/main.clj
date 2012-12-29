@@ -1,10 +1,15 @@
 (ns zurg.main
   (:use clojure.core.logic))
 
+(def buzz 5)
+(def woody 10)
+(def rex 20)
+(def hamm 25)
+
+(def bound 60)
+
+(defn do-solve []
+  (run* [q]))
+
 (defn -main [& args]
-  (let [buzz 5
-        woody 10
-        rex 20
-        hamm 25
-        q (run* [q])]
-    (println q)))
+  (println (do-solve)))
