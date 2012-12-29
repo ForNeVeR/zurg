@@ -1,4 +1,3 @@
 (ns zurg.main)
 
-(defn -main [& args]
-)
+(defn -main [& args])
