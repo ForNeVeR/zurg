@@ -54,14 +54,27 @@
        (appendo route [traveler] route2)
        (step left-side2 right-side2 route2 out)))))
 
+(defn calc [t]
+  (cond
+    (vector? t) (let [[t1 t2] t]
+                  (max (calc t1)
+                       (calc t2)))
+    :else (let [table {:buzz buzz
+                       :woody woody
+                       :rex rex
+                       :hamm hamm}]
+            (get table t))))
+
+(defn time [route]
+  (let [result (reduce + (map calc route))]
+    (println "Testing" route ":" result "min")
+    result))
+
 (defn do-solve []
-  (run 1 [route]
-    (step [:buzz :woody :rex :hamm :light] [] route)
-    (fresh [time]
-      ;; TODO: calculate travel time from the route variable
-      (== time 60)
-      (project [time]
-        (== true (<= time boundary))))))
+  (run* [route]
+    (step [:buzz :woody :rex :hamm :light] [] [] route)
+    (project [route]
+      (== true (<= (time route) boundary)))))
 
 (defn -main [& args]
   (println (do-solve)))
