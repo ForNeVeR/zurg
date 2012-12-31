@@ -16,7 +16,12 @@
        (membero traveler1 left-side)
        (membero traveler2 left-side)
        (=/= traveler1 traveler2)
-       ;; TODO: remove t1 and t2 from the left side
+
+       ;; Remove two elements from left-side and associate result with left-side2:
+       (fresh [tmp]
+         (rembero traveler1 left-side tmp)
+         (rembero traveler2 tmp left-side2))
+
        (appendo right-side [traveler1 traveler2] right-side2)
        (appendo route [traveler2 traveler2] route2)
        (step left-side2 right-side2 route2)))
@@ -24,7 +29,7 @@
      (fresh [left-side2 right-side2 route2 traveler]
        (membero traveler right-side)
        (appendo left-side [:light traveler] left-side2)
-       ;; TODO: Define right-side2 as the right-side without the traveler
+       (rembero traveler right-side right-side2)
        (appendo route [toy] route2)
        (step left-side2 right-side2 router2)))))
 
@@ -33,6 +38,7 @@
     (step [:buzz :woody :rex :hamm :light] [] route)
     (fresh [time]
       ;; TODO: calculate travel time from the route variable
+      (== time 60)
       (project [time]
         (== true (<= time boundary))))))
 
