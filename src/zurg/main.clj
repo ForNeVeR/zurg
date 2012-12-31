@@ -9,9 +9,14 @@
 (def boundary 60)
 
 (defn do-solve []
-  (run* [q]
-    (project [q]
-      (== true (< q boundary)))))
+  (run* [route]
+    (fresh [time]
+      (conde
+        ((== time 30) (== route 1))
+        ((== time 60) (== route 2))
+        ((== time 90) (== route 3)))
+      (project [time]
+        (== true (<= time boundary))))))
 
 (defn -main [& args]
   (println (do-solve)))
